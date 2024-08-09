@@ -10,6 +10,8 @@ sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
 
+from app.api import *
+
 
 async def handle_group_message(websocket, msg):
     try:
