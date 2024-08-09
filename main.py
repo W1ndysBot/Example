@@ -14,6 +14,10 @@ DATA_DIR = os.path.join(
     "example",
 )
 
+# 确保数据目录存在
+os.makedirs(DATA_DIR, exist_ok=True)
+
+
 # 添加项目根目录到sys.path
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
