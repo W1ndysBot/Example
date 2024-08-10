@@ -25,6 +25,21 @@ sys.path.append(
 
 from app.config import owner_id
 from app.api import *
+from app.scripts.GroupSwitch.main import *
+
+
+# 查看功能开关状态
+def load_function_status(group_id):
+    return load_switch(
+        group_id, "function_status"
+    )  # 注意：function_status 是开关名称，请根据实际情况修改
+
+
+# 保存功能开关状态
+def save_function_status(group_id, status):
+    save_switch(
+        group_id, "function_status", status
+    )  # 注意：function_status 是开关名称，请根据实际情况修改
 
 
 # 群消息处理函数
@@ -37,7 +52,9 @@ async def handle_group_message(websocket, msg):
         message_id = msg.get("message_id")
 
     except Exception as e:
-        logging.error(f"处理xxx群消息失败: {e}")
+        logging.error(
+            f"处理xxx群消息失败: {e}"
+        )  # 注意：xxx 是具体功能，请根据实际情况修改
         return
 
 
@@ -51,7 +68,9 @@ async def handle_group_notice(websocket, msg):
         message_id = msg.get("message_id")
 
     except Exception as e:
-        logging.error(f"处理xxx群消息失败: {e}")
+        logging.error(
+            f"处理xxx群通知失败: {e}"
+        )  # 注意：xxx 是具体功能，请根据实际情况修改
         return
 
 
