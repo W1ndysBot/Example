@@ -60,11 +60,11 @@ def save_function_status(group_id, status):
 # 群消息处理函数
 async def handle_Example_group_message(websocket, msg):
     try:
-        user_id = msg.get("user_id")
-        group_id = msg.get("group_id")
-        raw_message = msg.get("raw_message")
-        role = msg.get("sender", {}).get("role")
-        message_id = msg.get("message_id")
+        user_id = str(msg.get("user_id"))
+        group_id = str(msg.get("group_id"))
+        raw_message = str(msg.get("raw_message"))
+        role = str(msg.get("sender", {}).get("role"))
+        message_id = str(msg.get("message_id"))
 
     except Exception as e:
         logging.error(
@@ -76,11 +76,11 @@ async def handle_Example_group_message(websocket, msg):
 # 群通知处理函数
 async def handle_Example_group_notice(websocket, msg):
     try:
-        user_id = msg.get("user_id")
-        group_id = msg.get("group_id")
-        raw_message = msg.get("raw_message")
-        role = msg.get("sender", {}).get("role")
-        message_id = msg.get("message_id")
+        user_id = str(msg.get("user_id"))
+        group_id = str(msg.get("group_id"))
+        raw_message = str(msg.get("raw_message"))
+        role = str(msg.get("sender", {}).get("role"))
+        message_id = str(msg.get("message_id"))
 
     except Exception as e:
         logging.error(
@@ -92,8 +92,8 @@ async def handle_Example_group_notice(websocket, msg):
 # 私聊消息处理函数
 async def handle_Example_private_message(websocket, msg):
     try:
-        user_id = msg.get("user_id")
-        raw_message = msg.get("raw_message")
+        user_id = str(msg.get("user_id"))
+        raw_message = str(msg.get("raw_message"))
 
     except Exception as e:
         logging.error(f"处理xxx私聊消息失败: {e}")
