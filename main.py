@@ -45,16 +45,12 @@ def is_authorized(role, user_id):
 
 # 查看功能开关状态
 def load_function_status(group_id):
-    return load_switch(
-        group_id, "function_status"
-    )  # 注意：function_status 是开关名称，请根据实际情况修改
+    return load_switch(group_id, "function_status")
 
 
 # 保存功能开关状态
 def save_function_status(group_id, status):
-    save_switch(
-        group_id, "function_status", status
-    )  # 注意：function_status 是开关名称，请根据实际情况修改
+    save_switch(group_id, "function_status", status)
 
 
 # 群消息处理函数
@@ -67,9 +63,7 @@ async def handle_Example_group_message(websocket, msg):
         message_id = str(msg.get("message_id"))
 
     except Exception as e:
-        logging.error(
-            f"处理Example群消息失败: {e}"
-        )  # 注意：Example 是具体功能，请根据实际情况修改
+        logging.error(f"处理Example群消息失败: {e}")
         return
 
 
@@ -83,9 +77,7 @@ async def handle_Example_group_notice(websocket, msg):
         message_id = str(msg.get("message_id"))
 
     except Exception as e:
-        logging.error(
-            f"处理Example群通知失败: {e}"
-        )  # 注意：Example 是具体功能，请根据实际情况修改
+        logging.error(f"处理Example群通知失败: {e}")
         return
 
 
@@ -105,8 +97,6 @@ async def Example_main(websocket, msg):
     # 确保数据目录存在
     os.makedirs(DATA_DIR, exist_ok=True)
 
-    # 根据消息类型执行不同的函数，一般按照消息类型写不同的功能，这里一般只需要一个函数，删除多余即可
-    # 如果需要多个函数，请使用asyncio.gather并发执行
     await handle_Example_group_message(websocket, msg)
     await handle_Example_group_notice(websocket, msg)
     await handle_Example_private_message(websocket, msg)
