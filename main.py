@@ -1,13 +1,8 @@
 # script/example/main.py
-# 示例脚本
-# 本脚本写好了基本的函数，直接在函数中编写逻辑即可，必要的时候可以修改函数名
-# 注意：Example 是具体功能，请根据实际情况一键替换即可
-# 注意：function 是函数名称，请根据实际情况一键替换即可
 
 import logging
 import os
 import sys
-import asyncio
 
 # 添加项目根目录到sys.path
 sys.path.append(
@@ -38,6 +33,8 @@ def save_function_status(group_id, status):
 
 # 群消息处理函数
 async def handle_Example_group_message(websocket, msg):
+    # 确保数据目录存在
+    os.makedirs(DATA_DIR, exist_ok=True)
     try:
         user_id = str(msg.get("user_id"))
         group_id = str(msg.get("group_id"))
@@ -52,6 +49,8 @@ async def handle_Example_group_message(websocket, msg):
 
 # 群通知处理函数
 async def handle_Example_group_notice(websocket, msg):
+    # 确保数据目录存在
+    os.makedirs(DATA_DIR, exist_ok=True)
     try:
         user_id = str(msg.get("user_id"))
         group_id = str(msg.get("group_id"))
@@ -66,6 +65,9 @@ async def handle_Example_group_notice(websocket, msg):
 
 # 私聊消息处理函数
 async def handle_Example_private_message(websocket, msg):
+    # 确保数据目录存在
+    os.makedirs(DATA_DIR, exist_ok=True)
+
     try:
         user_id = str(msg.get("user_id"))
         raw_message = str(msg.get("raw_message"))
@@ -73,13 +75,3 @@ async def handle_Example_private_message(websocket, msg):
     except Exception as e:
         logging.error(f"处理xxx私聊消息失败: {e}")
         return
-
-
-async def Example_main(websocket, msg):
-
-    # 确保数据目录存在
-    os.makedirs(DATA_DIR, exist_ok=True)
-
-    await handle_Example_group_message(websocket, msg)
-    await handle_Example_group_notice(websocket, msg)
-    await handle_Example_private_message(websocket, msg)
