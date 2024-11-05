@@ -61,17 +61,3 @@ async def handle_Example_group_notice(websocket, msg):
     except Exception as e:
         logging.error(f"处理Example群通知失败: {e}")
         return
-
-
-# 私聊消息处理函数
-async def handle_Example_private_message(websocket, msg):
-    # 确保数据目录存在
-    os.makedirs(DATA_DIR, exist_ok=True)
-
-    try:
-        user_id = str(msg.get("user_id"))
-        raw_message = str(msg.get("raw_message"))
-
-    except Exception as e:
-        logging.error(f"处理xxx私聊消息失败: {e}")
-        return
