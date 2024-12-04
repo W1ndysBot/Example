@@ -23,12 +23,12 @@ DATA_DIR = os.path.join(
 
 # 查看功能开关状态
 def load_function_status(group_id):
-    return load_switch(group_id, "function_status")
+    return load_switch(group_id, "example")
 
 
 # 保存功能开关状态
 def save_function_status(group_id, status):
-    save_switch(group_id, "function_status", status)
+    save_switch(group_id, "example", status)
 
 
 # 群消息处理函数
