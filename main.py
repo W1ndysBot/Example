@@ -44,7 +44,11 @@ async def handle_Example_group_message(websocket, msg):
 
     except Exception as e:
         logging.error(f"处理Example群消息失败: {e}")
-        await send_group_msg(group_id, "处理Example群消息失败，错误信息：" + str(e))
+        await send_group_msg(
+            websocket,
+            group_id,
+            "处理Example群消息失败，错误信息：" + str(e),
+        )
         return
 
 
@@ -61,5 +65,9 @@ async def handle_Example_group_notice(websocket, msg):
 
     except Exception as e:
         logging.error(f"处理Example群通知失败: {e}")
-        await send_group_msg(group_id, "处理Example群通知失败，错误信息：" + str(e))
+        await send_group_msg(
+            websocket,
+            group_id,
+            "处理Example群通知失败，错误信息：" + str(e),
+        )
         return
