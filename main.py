@@ -9,7 +9,7 @@ sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
 
-from app.config import owner_id
+from app.config import *
 from app.api import *
 from app.switch import load_switch, save_switch
 
