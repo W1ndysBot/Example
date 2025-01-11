@@ -13,6 +13,7 @@ from app.config import *
 from app.api import *
 from app.switch import load_function_status, save_function_status
 
+
 # 数据存储路径，实际开发时，请将Example替换为具体的数据存放路径
 DATA_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
