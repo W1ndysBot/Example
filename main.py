@@ -11,7 +11,7 @@ sys.path.append(
 
 from app.config import *
 from app.api import *
-from app.switch import load_function_status, save_function_status
+from app.switch import load_switch, save_switch
 
 
 # 数据存储路径，实际开发时，请将Example替换为具体的数据存放路径
@@ -20,6 +20,16 @@ DATA_DIR = os.path.join(
     "data",
     "Example",
 )
+
+
+# 查看功能开关状态
+def load_function_status(group_id):
+    return load_switch(group_id, "Example")
+
+
+# 保存功能开关状态
+def save_function_status(group_id, status):
+    save_switch(group_id, "Example", status)
 
 
 # 处理开关状态
