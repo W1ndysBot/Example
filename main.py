@@ -11,7 +11,7 @@ sys.path.append(
 
 from app.config import *
 from app.api import *
-from app.switch import load_switch, save_switch
+from app.switch import load_function_status, save_function_status
 
 # 数据存储路径，实际开发时，请将Example替换为具体的数据存放路径
 DATA_DIR = os.path.join(
@@ -21,14 +21,28 @@ DATA_DIR = os.path.join(
 )
 
 
-# 查看功能开关状态
-def load_function_status(group_id):
-    return load_switch(group_id, "example")
+# 处理开关状态
+async def toggle_function_status(websocket, group_id, message_id, authorized):
+    if not authorized:
+        await send_group_msg(
+            websocket,
+            group_id,
+            f"[CQ:reply,id={message_id}]❌❌❌你没有权限对Example功能进行操作,请联系管理员。",
+        )
+        return
 
-
-# 保存功能开关状态
-def save_function_status(group_id, status):
-    save_switch(group_id, "example", status)
+    if load_function_status(group_id):
+        save_function_status(group_id, False)
+        await send_group_msg(
+            websocket,
+            group_id,
+            f"[CQ:reply,id={message_id}]🚫🚫🚫Example功能已关闭",
+        )
+    else:
+        save_function_status(group_id, True)
+        await send_group_msg(
+            websocket, group_id, f"[CQ:reply,id={message_id}]✅✅✅Example功能已开启"
+        )
 
 
 # 群消息处理函数
