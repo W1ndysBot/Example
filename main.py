@@ -71,3 +71,17 @@ async def handle_Example_group_notice(websocket, msg):
             "处理Example群通知失败，错误信息：" + str(e),
         )
         return
+
+
+# 回应事件处理函数
+async def handle_Example_response_message(websocket, message):
+    try:
+        msg = json.loads(message)
+
+        if msg.get("status") == "ok":
+            echo = msg.get("echo")
+
+            if echo and echo.startswith("xxx"):
+                pass
+    except Exception as e:
+        logging.error(f"处理Example回应事件时发生错误: {e}")
