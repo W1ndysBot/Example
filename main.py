@@ -66,7 +66,14 @@ async def handle_Example_group_message(websocket, msg):
         raw_message = str(msg.get("raw_message"))
         role = str(msg.get("sender", {}).get("role"))
         message_id = str(msg.get("message_id"))
+        authorized = user_id in owner_id
 
+        # 是否是开启命令
+        if raw_message.startswith("ex"):
+            await toggle_function_status(websocket, group_id, message_id, authorized)
+        else:
+            # 其他处理函数
+            pass
     except Exception as e:
         logging.error(f"处理Example群消息失败: {e}")
         await send_group_msg(
