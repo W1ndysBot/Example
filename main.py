@@ -73,9 +73,13 @@ async def handle_Example_group_message(websocket, msg):
         message_id = str(msg.get("message_id"))
         authorized = user_id in owner_id
 
-        # 是否是开启命令
-        if raw_message.startswith("ex"):
+        # 开关
+        if raw_message == "example":
             await toggle_function_status(websocket, group_id, message_id, authorized)
+            return
+        # 检查是否开启
+        if not load_function_status(group_id):
+            return
         else:
             # 其他处理函数
             pass
