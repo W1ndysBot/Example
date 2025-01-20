@@ -78,9 +78,7 @@ async def handle_Example_group_message(websocket, msg):
             await toggle_function_status(websocket, group_id, message_id, authorized)
             return
         # 检查是否开启
-        if not load_function_status(group_id):
-            return
-        else:
+        if load_function_status(group_id):
             # 其他处理函数
             pass
     except Exception as e:
