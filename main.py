@@ -93,6 +93,21 @@ async def handle_Example_group_message(websocket, msg):
         return
 
 
+# 私聊消息处理函数
+async def handle_Example_private_message(websocket, msg):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    try:
+        pass
+    except Exception as e:
+        logging.error(f"处理Example私聊消息失败: {e}")
+        await send_private_msg(
+            websocket,
+            msg.get("user_id"),
+            "处理Example私聊消息失败，错误信息：" + str(e),
+        )
+        return
+
+
 # 群通知处理函数
 async def handle_Example_group_notice(websocket, msg):
     # 确保数据目录存在
