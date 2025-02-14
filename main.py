@@ -97,6 +97,8 @@ async def handle_Example_group_message(websocket, msg):
 async def handle_Example_private_message(websocket, msg):
     os.makedirs(DATA_DIR, exist_ok=True)
     try:
+        user_id = str(msg.get("user_id"))
+        raw_message = str(msg.get("raw_message"))
         pass
     except Exception as e:
         logging.error(f"处理Example私聊消息失败: {e}")
