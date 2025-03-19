@@ -152,6 +152,17 @@ async def handle_response(websocket, msg):
         return
 
 
+# 请求事件处理函数
+async def handle_request_event(websocket, msg):
+    """处理请求事件"""
+    try:
+        request_type = msg.get("request_type")
+        pass
+    except Exception as e:
+        logging.error(f"处理Example请求事件失败: {e}")
+        return
+
+
 # 统一事件处理入口
 async def handle_events(websocket, msg):
     """统一事件处理入口"""
@@ -179,6 +190,10 @@ async def handle_events(websocket, msg):
         # 处理通知事件
         elif post_type == "notice":
             await handle_group_notice(websocket, msg)
+
+        # 处理请求事件
+        elif post_type == "request":
+            await handle_request_event(websocket, msg)
 
     except Exception as e:
         error_type = {
