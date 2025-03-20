@@ -34,12 +34,6 @@ def save_function_status(group_id, status):
     save_switch(group_id, "Example", status)
 
 
-# 处理元事件，用于启动时确保数据目录存在
-async def handle_meta_event(websocket, msg):
-    """处理元事件"""
-    os.makedirs(DATA_DIR, exist_ok=True)
-
-
 # 处理开关状态
 async def toggle_function_status(websocket, group_id, message_id, authorized):
     if not authorized:
@@ -177,7 +171,7 @@ async def handle_events(websocket, msg):
 
         # 处理元事件
         if post_type == "meta_event":
-            await handle_meta_event(websocket, msg)
+            pass
 
         # 处理消息事件
         elif post_type == "message":
