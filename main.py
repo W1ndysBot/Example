@@ -12,7 +12,7 @@ sys.path.append(
 )
 
 from app.config import *
-from app.api import *
+from app.api import send_group_msg, send_private_msg
 from app.switch import load_switch, save_switch
 
 
@@ -162,18 +162,18 @@ async def handle_events(websocket, msg):
     """统一事件处理入口"""
     post_type = msg.get("post_type", "response")  # 添加默认值
     try:
-        # 处理回调事件
+        # 处理回调事件，用于一些需要获取ws返回内容的事件
         if msg.get("status") == "ok":
             await handle_response(websocket, msg)
             return
 
         post_type = msg.get("post_type")
 
-        # 处理元事件
+        # 处理元事件，每次心跳时触发，用于一些定时任务
         if post_type == "meta_event":
             pass
 
-        # 处理消息事件
+        # 处理消息事件，用于处理群消息和私聊消息
         elif post_type == "message":
             message_type = msg.get("message_type")
             if message_type == "group":
@@ -181,11 +181,11 @@ async def handle_events(websocket, msg):
             elif message_type == "private":
                 await handle_private_message(websocket, msg)
 
-        # 处理通知事件
+        # 处理通知事件，用于处理群通知
         elif post_type == "notice":
             await handle_group_notice(websocket, msg)
 
-        # 处理请求事件
+        # 处理请求事件，用于处理请求事件
         elif post_type == "request":
             await handle_request_event(websocket, msg)
 
