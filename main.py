@@ -162,6 +162,8 @@ async def handle_events(websocket, msg):
     """统一事件处理入口"""
     post_type = msg.get("post_type", "response")  # 添加默认值
     try:
+        # 这里可以放一些定时任务，在函数内设置时间差检测即可
+
         # 处理回调事件，用于一些需要获取ws返回内容的事件
         if msg.get("status") == "ok":
             await handle_response(websocket, msg)
